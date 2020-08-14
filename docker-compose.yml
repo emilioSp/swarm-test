@@ -3,14 +3,30 @@ version: '3.7'
 services:
   simple-node:
     command: yarn start
-    build:
-      context: .
     image: espatola/docker-simple-node
-    container_name: simple-node
     ports:
       - 80:80
     healthcheck:
       test: curl --fail --max-time 1 http://localhost/
-      start_period: 5s
+      start_period: 2s
       interval: 20s
       retries: 3
+    deploy:
+      mode: replicated
+      replicas: 3
+      restart_policy:
+        condition: on-failure
+      rollback_config:
+        parallelism: 0
+        order: start-first
+        failure_action: continue
+      update_config:
+        parallelism: 0
+        order: start-first
+        failure_action: rollback
+    networks:
+      - verse
+
+networks:
+  verse:
+      name: verse
