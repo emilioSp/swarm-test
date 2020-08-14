@@ -9,3 +9,8 @@ services:
     container_name: simple-node
     ports:
       - 80:80
+    healthcheck:
+      test: curl --fail --max-time 1 http://localhost/
+      start_period: 5s
+      interval: 20s
+      retries: 3

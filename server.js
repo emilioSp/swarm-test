@@ -13,6 +13,7 @@ const init = async () => {
       status: 'OK',
       date: new Date().toISOString()
     }
+    console.log(response);
     res.end(JSON.stringify(response));
   });
 
