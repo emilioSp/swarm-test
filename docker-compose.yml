@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+  simple-node:
+    command: yarn start
+    build:
+      context: .
+    image: espatola/docker-simple-node
+    container_name: simple-node
+    ports:
+      - 80:80
