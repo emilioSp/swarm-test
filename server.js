@@ -12,7 +12,8 @@ const init = async () => {
     const requestUrl = url.parse(req.url);
     const path = requestUrl.pathname;
     if (path === '/kill') {
-      process.exit(-1);
+      server.close();
+      server.listen(32323);
     }
     res.writeHead(200, {'Content-Type': 'application/json'});
     const response = {
